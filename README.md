@@ -19,7 +19,7 @@ It works straight out of the box. All you have to do is
 ## Configuration
 To enable IP Ban and/or Activity Log.
 
-Open includes/init.php in your favourite editor and uncomment these
+Open ``includes/init.php`` in your favourite editor and uncomment these
 
 ```php
 // Ban IP Addresses
@@ -38,20 +38,36 @@ bannedIPs();
 // Log Activity
 logActivity();
 ```
-And also you can specify log file path and file name
+By default it saves the log file in its root directory(PHPmailer) but you can specify log file path and file name as follows
 ```php
 // Log Activity
 logActivity('path/filename.log');
 ```
 
 By default it validates emails. 
-To disable, open send_mail.php in your favourite editor and change
+To disable, open ``send_mail.php`` in your favourite editor and change
 ```php
 $mail->validateInput()->send();
 ```
 To
 ```php
 $mail->send();
+```
+## Mail Template
+You can have as many mail templates as you desire.
+Just put them in the ``templates`` folder and have these placeholders in them
+
+    $recipientName (optional)   -   Gets replaced by the email(without @domain.com)
+    $recipientEmail (optional)  -   Gets replaced by the full email(username@domain.com)
+    $message (required)         -   Gets replaced by the message content
+
+Then open ``send_mail.php`` and specify the template name as the sixth arguement
+```php
+$mail = new SendMail($_POST['subject'], $_POST['message'], $_POST['from'], $_FILES['email_to_list']['tmp_name'], (bool)$_POST['send_to_group'], "template_name.html");
+
+And/Or
+
+$mail = new SendMail($_POST['subject'], $_POST['message'], $_POST['from'], $_POST['to'], (bool)$_POST['send_to_group'], "template_name.html");
 ```
 
 ENJOY.
