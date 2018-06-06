@@ -1,5 +1,8 @@
 # PHPmailer
-Simple PHP mailer package. No extra packages needed to work.
+Simple PHP mailer package.
+
+This package helps you to send highly customizable HTML emails with PHP.
+And works straight out of the box. Just drop it on your server and you are good to go.
 
 ## Installation
 It works straight out of the box. All you have to do is
@@ -16,7 +19,7 @@ It works straight out of the box. All you have to do is
 	mv PHPmailer-master PHPmailer
 	visit https://your-site-url/PHPmailer
 
-## Configuration
+## Configuration (optional)
 To enable IP Ban and/or Activity Log.
 
 Open ``includes/init.php`` in your favourite editor and uncomment these
@@ -61,7 +64,7 @@ Just put them in the ``templates`` folder and have these placeholders in them
     $recipientEmail (optional)  -   Gets replaced by the full email(username@domain.com)
     $message (required)         -   Gets replaced by the message content
 
-Then open ``send_mail.php`` and specify the template name as the sixth arguement
+Then open ``send_mail.php`` and specify the template name as the sixth arguement / parameter
 ```php
 $mail = new SendMail($_POST['subject'], $_POST['message'], $_POST['from'], $_FILES['email_to_list']['tmp_name'], (bool)$_POST['send_to_group'], "template_name.html");
 
