@@ -76,6 +76,9 @@ deny from 84.110
 deny from 178.25
 deny from 74.125
 deny from 104.196
+deny from 35.184
+deny from 34.230
+deny from 54.90
 deny from 69.63.176.0/20
 deny from 69.63.189
 deny from 128.242.99.77
