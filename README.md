@@ -67,11 +67,12 @@ Just put them in the ``templates`` folder and have these placeholders in them
 Then open ``send_mail.php`` and specify the template name as the sixth arguement / parameter
 ```php
 new SendMail($_POST['subject'], $_POST['message'], $_POST['from'], $_FILES['email_to_list']['tmp_name'], (bool)$_POST['send_to_group'], "template_name.html");
+```
 
-Or
+OR
 
+```php
 new SendMail($_POST['subject'], $_POST['message'], $_POST['from'], $_POST['to'], (bool)$_POST['send_to_group'], "template_name.html");
 ```
 
-
-:rocket:
+:fire: :rocket:
