@@ -8,12 +8,12 @@ And works straight out of the box. Just drop it on your server and you are good 
 It works straight out of the box. All you have to do is
 
 	cd into your root directory (public_html or www)
-	git clone git@github.com:Paplow/PHPmailer.git
+	git clone git@github.com:kodjunkie/PHPmailer.git
 	visit https://your-site-url/PHPmailer
     
 	OR:
 
-	Download the latest version at: https://github.com/Paplow/PHPmailer/archive/master.zip
+	Download the latest version at: https://github.com/kodjunkie/PHPmailer/archive/master.zip
 	unzip in into your root directory (public_html or www)
 	unzip master.zip
 	mv PHPmailer-master PHPmailer
@@ -66,11 +66,12 @@ Just put them in the ``templates`` folder and have these placeholders in them
 
 Then open ``send_mail.php`` and specify the template name as the sixth arguement / parameter
 ```php
-$mail = new SendMail($_POST['subject'], $_POST['message'], $_POST['from'], $_FILES['email_to_list']['tmp_name'], (bool)$_POST['send_to_group'], "template_name.html");
+new SendMail($_POST['subject'], $_POST['message'], $_POST['from'], $_FILES['email_to_list']['tmp_name'], (bool)$_POST['send_to_group'], "template_name.html");
 
-And/Or
+Or
 
-$mail = new SendMail($_POST['subject'], $_POST['message'], $_POST['from'], $_POST['to'], (bool)$_POST['send_to_group'], "template_name.html");
+new SendMail($_POST['subject'], $_POST['message'], $_POST['from'], $_POST['to'], (bool)$_POST['send_to_group'], "template_name.html");
 ```
 
-ENJOY.
+
+:rocket:
