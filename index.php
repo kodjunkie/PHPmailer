@@ -1,21 +1,7 @@
 <?php
-
 /*
- ****************************************************************************
-             _______                      __
-            /       \                    /  |
-            $$$$$$$  | ______    ______  $$ |  ______   __   __   __
-            $$ |__$$ |/      \  /      \ $$ | /      \ /  | /  | /  |
-            $$    $$/ $$$$$$  |/$$$$$$  |$$ |/$$$$$$  |$$ | $$ | $$ |
-            $$$$$$$/  /    $$ |$$ |  $$ |$$ |$$ |  $$ |$$ | $$ | $$ |
-            $$ |     /$$$$$$$ |$$ |__$$ |$$ |$$ \__$$ |$$ \_$$ \_$$ |
-            $$ |     $$    $$ |$$    $$/ $$ |$$    $$/ $$   $$   $$/
-            $$/       $$$$$$$/ $$$$$$$/  $$/  $$$$$$/   $$$$$/$$$$/
-                               $$ |
-                               $$ |
-                               $$/
- ****************************************************************************
- */
+ * Index page
+ * */
 
 require_once("./includes/init.php");
 ?>
@@ -51,19 +37,22 @@ require_once("./includes/init.php");
         <div class="top-section">
             <?php
                 if (isset($_SESSION['msg']) && !empty($_SESSION['msg'])) { ?>
-                    <div class="col-sm-6 col-sm-offset-3">
-                        <div class="alert alert-<?= ($_SESSION['msg'][1]) ? 'success' : 'danger' ?>">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <?php
-                                echo trim($_SESSION['msg'][0]);
-                                unset($_SESSION['msg']);
-                            ?>
+                    <div class="row">
+                        <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
+                            <div class="alert alert-<?= ($_SESSION['msg'][1]) ? 'success' : 'danger' ?>"
+                                 style="margin-top: 2em">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <?php
+                                    echo trim($_SESSION['msg'][0]);
+                                    unset($_SESSION['msg']);
+                                ?>
+                            </div>
                         </div>
                     </div>
             <?php } ?>
         </div>
             <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 card">
-                <form action="./send_mail.php" method="post" role="form" enctype="multipart/form-data">
+                <form action="./handler.php" method="post" role="form" enctype="multipart/form-data">
                     <legend>Send e-Mail</legend>
 
                     <div class="form-group">
