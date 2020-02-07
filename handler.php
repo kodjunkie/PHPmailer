@@ -1,41 +1,25 @@
 <?php
 
 /*
- ****************************************************************************
-             _______                      __
-            /       \                    /  |
-            $$$$$$$  | ______    ______  $$ |  ______   __   __   __
-            $$ |__$$ |/      \  /      \ $$ | /      \ /  | /  | /  |
-            $$    $$/ $$$$$$  |/$$$$$$  |$$ |/$$$$$$  |$$ | $$ | $$ |
-            $$$$$$$/  /    $$ |$$ |  $$ |$$ |$$ |  $$ |$$ | $$ | $$ |
-            $$ |     /$$$$$$$ |$$ |__$$ |$$ |$$ \__$$ |$$ \_$$ \_$$ |
-            $$ |     $$    $$ |$$    $$/ $$ |$$    $$/ $$   $$   $$/
-            $$/       $$$$$$$/ $$$$$$$/  $$/  $$$$$$/   $$$$$/$$$$/
-                               $$ |
-                               $$ |
-                               $$/
- ****************************************************************************
- */
+ * Handle the submitted form request
+ * */
 
 require_once("./includes/init.php");
 
+// Variables
+$subject = $_POST['subject'];
+$message = $_POST['message'];
+$from = $_POST['from'];
+$to = $_POST['to'];
+$emailList = $_FILES['email_to_list']['tmp_name'];
+$sendToGroup = (bool)$_POST['send_to_group'];
+
 // Instantiate the mail object
-if (isset($_FILES['email_to_list']['tmp_name']) && is_file($_FILES['email_to_list']['tmp_name']))
-    $mail = new SendMail(
-        $_POST['subject'], // Subject
-        $_POST['message'], // Message
-        $_POST['from'], // From
-        $_FILES['email_to_list']['tmp_name'], // To (Mail list file)
-        (bool)$_POST['send_to_group'] // Send to group
-    );
-else
-    $mail = new SendMail(
-        $_POST['subject'], // Subject
-        $_POST['message'], // Message
-        $_POST['from'], // From
-        $_POST['to'], // To
-        (bool)$_POST['send_to_group'] // Send to single email
-    );
+$mail = new SendMail($subject, $message, $from, $to, $sendToGroup);
+
+if (isset($emailList) && is_file($emailList)) {
+    $mail = new SendMail($subject, $message, $from, $emailList, $sendToGroup);
+}
 
 // Validate & Send the Mail
 $mail->validateInput()->send();

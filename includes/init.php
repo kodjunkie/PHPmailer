@@ -1,35 +1,28 @@
 <?php
 
 /*
- ****************************************************************************
-             _______                      __
-            /       \                    /  |
-            $$$$$$$  | ______    ______  $$ |  ______   __   __   __
-            $$ |__$$ |/      \  /      \ $$ | /      \ /  | /  | /  |
-            $$    $$/ $$$$$$  |/$$$$$$  |$$ |/$$$$$$  |$$ | $$ | $$ |
-            $$$$$$$/  /    $$ |$$ |  $$ |$$ |$$ |  $$ |$$ | $$ | $$ |
-            $$ |     /$$$$$$$ |$$ |__$$ |$$ |$$ \__$$ |$$ \_$$ \_$$ |
-            $$ |     $$    $$ |$$    $$/ $$ |$$    $$/ $$   $$   $$/
-            $$/       $$$$$$$/ $$$$$$$/  $$/  $$$$$$/   $$$$$/$$$$/
-                               $$ |
-                               $$ |
-                               $$/
- ****************************************************************************
- */
+ * Initialize the app
+ * */
 
 // Start Session
 session_start();
 
 // Include the functions file
-include("functions.php");
+include_once("functions.php");
 
 // Autoload classes
-function __autoload($classname) {
-    require_once("classes/".$classname.".php");
-}
+spl_autoload_register(function ($className) {
+    require_once("classes/".$className.".php");
+});
 
-// Ban IP Addresses
+/*
+ * Ban IP Addresses
+ * If enabled, public crawlers will be banned from accessing the app
+ * */
 //bannedIPs();
 
-// Log Activity
+/*
+ * Log Activity
+ * If enabled, every request to this app will be logged
+ * */
 //logActivity();
