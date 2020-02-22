@@ -6,6 +6,10 @@ Just drop it in your server and you are all set.
 
 ![logo](https://raw.githubusercontent.com/kodjunkie/PHPmailer/master/assets/PHPmailer.png)
 
+<h3 align="center">
+    <a href="https://kodjunkie.github.io/PHPmailer" target="_blank">Documentation Here</a>
+</h3>
+
 ## Installation
 It works straight out of the box. All you have to do is
 
@@ -20,7 +24,7 @@ It works straight out of the box. All you have to do is
 -   Rename `PHPmailer-master` to `PHPmailer`
 -   Lastly visit https://your-site-url/PHPmailer
 
-## Configuration (optional)
+## Configuration <small>(optional)</small>
 To enable IP Ban and / or Activity Logging.
 
 Open ``includes/init.php`` in your favourite editor and uncomment these
@@ -62,6 +66,13 @@ Just put them in the ``templates`` folder and have these placeholders in them
     $recipientEmail (optional)  -   Gets replaced by the full email(username@domain.com)
     $message (required)         -   Gets replaced by the message content
 
-Then open ``handler.php`` and specify the template name as the sixth argument to `SendMail` class.
+Then open ``handler.php`` and specify the template name as the sixth argument to `SendMail` class, like below.
+```php
+// Instantiate the mail object
+$mail = new SendMail($subject, $message, $from, $to, $sendToGroup, 'template_name.html');
+if (isset($emailList) && is_file($emailList)) {
+    $mail = new SendMail($subject, $message, $from, $emailList, $sendToGroup, 'template_name.html');
+}
+```
 
 :fire: :rocket:
