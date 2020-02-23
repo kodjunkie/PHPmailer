@@ -22,7 +22,7 @@ if (isset($emailList) && is_file($emailList)) {
 }
 
 // Validate & Send the Mail
-$mail->validateInput()->send();
+$mail->validate()->send();
 
 // Redirect to index page
 header('Location: ./index.php');

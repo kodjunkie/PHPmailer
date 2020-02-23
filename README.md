@@ -55,7 +55,7 @@ logActivity('path/filename.log');
 By default it validates emails. 
 To disable, open ``handler.php`` in your editor and change
 ```php
-$mail->validateInput()->send();
+$mail->validate()->send();
 ```
 To
 ```php

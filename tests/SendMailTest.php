@@ -11,8 +11,8 @@ class SendMailTest extends TestCase
      */
     public function setUp(): void
     {
-        $this->sendmail = Mockery::mock('SendMail[validateInput,send]', [
-            'Tests', 'Testing', 'admin@test.com', 'tester@test.com', false
+        $this->sendmail = Mockery::mock('SendMail[validate,send]', [
+            'Tests', 'Testing', 'admin@test.com', 'tester@test.com'
         ]);
     }
 
@@ -24,10 +24,10 @@ class SendMailTest extends TestCase
         Mockery::close();
     }
 
-    public function testValidateInput()
+    public function testValidate()
     {
-        $this->sendmail->shouldReceive('validateInput')->with()->once()->andReturn(true);
-        $expected = $this->sendmail->validateInput();
+        $this->sendmail->shouldReceive('validate')->with()->once()->andReturn(true);
+        $expected = $this->sendmail->validate();
         $this->assertTrue($expected);
     }
 

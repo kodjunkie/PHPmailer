@@ -8,11 +8,11 @@
 session_start();
 
 // Include the functions file
-include_once("functions.php");
+include_once(__DIR__ . "/functions.php");
 
 // Autoload classes
 spl_autoload_register(function ($className) {
-    require_once("classes/".$className.".php");
+    require_once("classes/" . $className . ".php");
 });
 
 /*
