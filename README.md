@@ -4,11 +4,15 @@ A simple PHP mailer package with zero dependencies.
 This package let you send highly customizable HTML emails and works straight out of the box. 
 Just drop it in your server and you are all set.
 
+<p align="center">
+  <img src="https://github.com/kodjunkie/PHPmailer/workflows/PHPmailer/badge.svg?branch=master">
+</p>
+
 ![logo](https://raw.githubusercontent.com/kodjunkie/PHPmailer/master/assets/PHPmailer.png)
 
-<h3 align="center">
+<h4 align="center">
     <a href="https://kodjunkie.github.io/PHPmailer" target="_blank">Documentation Here</a>
-</h3>
+</h4>
 
 ## Requirement
 >   <b>PHP 5 >= 5.1.0, PHP 7</b>
