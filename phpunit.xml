@@ -1,12 +1,12 @@
 <phpunit
         bootstrap="vendor/autoload.php"
         colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="false"
-         cacheResult="false">
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        processIsolation="false"
+        stopOnFailure="false"
+        cacheResult="false">
     <testsuites>
         <testsuite name="unit">
             <directory>tests</directory>
