@@ -11,26 +11,21 @@ class SendMail extends Mailer
     /**
      * Validate the email to send mail to
      * @return $this
+     * @throws Exception
      */
     public function validate()
     {
-        try {
-            if ($this->to_group && !empty($this->to) && is_file($this->to)) {
-                $emailList = file_get_contents($this->to);
-                $emails = explode("\n", $emailList);
-                if (end($emails) === "") array_pop($emails);
-                foreach ($emails as $email) {
-                    if (!$this->validator($email))
-                        throw new Exception('Invalid email format "' . $email . '"');
-                }
-            } else {
-                if (!$this->validator($this->to))
-                    throw new Exception('Invalid email format "' . $this->to . '"');
+        if ($this->to_group && !empty($this->to) && is_file($this->to)) {
+            $emailList = file_get_contents($this->to);
+            $emails = explode("\n", $emailList);
+            if (end($emails) === "") array_pop($emails);
+            foreach ($emails as $email) {
+                if (!$this->validator($email))
+                    throw new InvalidArgumentException('Invalid email format "' . $email . '"');
             }
-        } catch (Exception $exception) {
-            $_SESSION['msg'] = ['Oops! ' . $exception->getMessage(), false];
-            header('Location: ./index.php');
-            die();
+        } else {
+            if (!$this->validator($this->to))
+                throw new InvalidArgumentException('Invalid email format "' . $this->to . '"');
         }
 
         return $this;
@@ -41,24 +36,20 @@ class SendMail extends Mailer
      */
     public function send()
     {
-        try {
-            $template = file_get_contents("./templates/" . $this->template);
+        $template = file_get_contents("./templates/" . $this->template);
 
-            if ($this->to_group && !empty($this->to) && is_file($this->to)) {
-                $emailList = file_get_contents($this->to);
-                $emails = explode("\n", $emailList);
-                if (end($emails) === "") array_pop($emails);
-                foreach ($emails as $email) {
-                    $this->messenger($email, $template);
-                }
-            } else {
-                $this->messenger($this->to, $template);
+        if ($this->to_group && !empty($this->to) && is_file($this->to)) {
+            $emailList = file_get_contents($this->to);
+            $emails = explode("\n", $emailList);
+            if (end($emails) === "") array_pop($emails);
+            foreach ($emails as $email) {
+                $this->messenger($email, $template);
             }
-
-            $_SESSION['msg'] = ['Message sent successfully.', true];
-        } catch (\Exception $exception) {
-            $_SESSION['msg'] = ['Oops! ' . $exception->getMessage(), false];
+        } else {
+            $this->messenger($this->to, $template);
         }
+
+        $_SESSION['msg'] = ['Message sent successfully.', true];
     }
 
 }

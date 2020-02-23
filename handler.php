@@ -14,15 +14,21 @@ $to = $_POST['to'];
 $emailList = $_FILES['email_to_list']['tmp_name'];
 $sendToGroup = (bool)$_POST['send_to_group'];
 
-// Instantiate the mail object
-$mail = new SendMail($subject, $message, $from, $to, $sendToGroup);
+try {
+    // Instantiate the mail object if sending to a single email
+    $mail = new SendMail($subject, $message, $from, $to, $sendToGroup);
 
-if (isset($emailList) && is_file($emailList)) {
-    $mail = new SendMail($subject, $message, $from, $emailList, $sendToGroup);
+    // Instantiate the mail object if sending to an email list
+    if (isset($emailList) && is_file($emailList)) {
+        $mail = new SendMail($subject, $message, $from, $emailList, $sendToGroup);
+    }
+
+    // Validate & Send the Mail
+    $mail->validate()->send();
+
+} catch (Exception $exception) {
+    $_SESSION['msg'] = ['Oops! ' . $exception->getMessage(), false];
 }
-
-// Validate & Send the Mail
-$mail->validate()->send();
 
 // Redirect to index page
 header('Location: ./index.php');
