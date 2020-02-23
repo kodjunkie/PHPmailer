@@ -6,7 +6,11 @@
         convertWarningsToExceptions="true"
         processIsolation="false"
         stopOnFailure="false"
-        cacheResult="false">
+        stopOnError="false"
+        cacheResult="false"
+        failOnRisky="true"
+        failOnWarning="true"
+        verbose="true">
     <testsuites>
         <testsuite name="unit">
             <directory>tests</directory>
