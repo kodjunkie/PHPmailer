@@ -16,5 +16,8 @@
     },
     "autoload-dev": {
         "classmap": ["./includes/classes"]
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
     }
 }
