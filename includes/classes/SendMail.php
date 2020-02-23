@@ -34,14 +34,6 @@ class SendMail
     }
 
     /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return "SendMail Class";
-    }
-
-    /**
      * Mail Header
      * @return string
      */
