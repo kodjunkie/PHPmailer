@@ -11,9 +11,34 @@ class SendMailTest extends TestCase
      */
     public function setUp(): void
     {
-        $this->sendmail = Mockery::mock('SendMail[validate,send]', [
+        $this->sendmail = new SendMail('Tests', 'Testing', 'admin@test.com', 'tester@test.com');
+    }
+
+    public function testCanConstruct()
+    {
+        $this->assertInstanceOf(SendMail::class, $this->sendmail);
+    }
+
+    public function testValidate()
+    {
+        $expected = $this->sendmail->validate();
+        $this->assertInstanceOf(SendMail::class, $expected);
+    }
+
+    public function testReturnExceptionOnInvalidEmail()
+    {
+        $sendmail = new SendMail('Tests', 'Testing', 'admin@test.com', 'tester@test');
+        $this->expectException(InvalidArgumentException::class);
+        $sendmail->validate();
+    }
+
+    public function testSend()
+    {
+        $sendmail = Mockery::mock('SendMail[send]', [
             'Tests', 'Testing', 'admin@test.com', 'tester@test.com'
         ]);
+        $sendmail->expects()->send()->once()->andReturn(true);
+        $this->assertTrue($sendmail->send());
     }
 
     /**
@@ -22,19 +47,5 @@ class SendMailTest extends TestCase
     public function tearDown(): void
     {
         Mockery::close();
-    }
-
-    public function testValidate()
-    {
-        $this->sendmail->shouldReceive('validate')->with()->once()->andReturn(true);
-        $expected = $this->sendmail->validate();
-        $this->assertTrue($expected);
-    }
-
-    public function testSend()
-    {
-        $this->sendmail->expects()->send()->once()->andReturn(true);
-        $expected = $this->sendmail->send();
-        $this->assertTrue($expected);
     }
 }
