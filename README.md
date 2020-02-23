@@ -6,9 +6,13 @@ Just drop it in your server and you are all set.
 
 ![logo](https://raw.githubusercontent.com/kodjunkie/PHPmailer/master/assets/PHPmailer.png)
 
-<h3 align="center">
+<p align="center">
+  <img src="https://github.com/kodjunkie/PHPmailer/workflows/PHPmailer/badge.svg?branch=master">
+</p>
+
+<h5 align="center">
     <a href="https://kodjunkie.github.io/PHPmailer" target="_blank">Documentation Here</a>
-</h3>
+</h5>
 
 ## Requirement
 >   <b>PHP 5 >= 5.1.0, PHP 7</b>
