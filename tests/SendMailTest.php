@@ -4,14 +4,16 @@ use \PHPUnit\Framework\TestCase;
 
 class SendMailTest extends TestCase
 {
-    public static $sendmail;
+    protected $sendmail;
 
     /**
      * This method is called before each test.
      */
     public function setUp(): void
     {
-        self::$sendmail = Mockery::mock(SendMail::class);
+        $this->sendmail = Mockery::mock('SendMail[validateInput,send]', [
+            'Tests', 'Testing', 'admin@test.com', 'tester@test.com', false
+        ]);
     }
 
     /**
@@ -24,24 +26,15 @@ class SendMailTest extends TestCase
 
     public function testValidateInput()
     {
-        self::$sendmail->shouldReceive('validateInput')->once()->andReturn(true);
-        $this->assertTrue(self::$sendmail->validateInput());
+        $this->sendmail->shouldReceive('validateInput')->with()->once()->andReturn(true);
+        $expected = $this->sendmail->validateInput();
+        $this->assertTrue($expected);
     }
 
     public function testSend()
     {
-        self::$sendmail->expects()->send()->once()->andReturn(true);
-        $this->assertTrue(self::$sendmail->send());
-    }
-
-    public function test__toString()
-    {
-        $this->expectOutputString("SendMail Class");
-        print new SendMail(
-            'Tests',
-            'Testing',
-            'admin@test.com',
-            'tester@test.com',
-            false);
+        $this->sendmail->expects()->send()->once()->andReturn(true);
+        $expected = $this->sendmail->send();
+        $this->assertTrue($expected);
     }
 }
