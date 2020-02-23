@@ -17,7 +17,7 @@ Just drop it in your server and you are all set.
 It works straight out of the box. All you have to do is
 
 -   Browse into your root directory (public_html or www)
--   In your terminal or CLI run `git clone git@github.com:kodjunkie/PHPmailer.git`
+-   In your terminal or CLI run `git clone https://github.com/kodjunkie/PHPmailer.git`
 -   Lastly visit https://your-site-url/PHPmailer
 
 <b>OR</b>
